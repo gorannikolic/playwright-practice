@@ -71,6 +71,7 @@ export default defineConfig<TestOption>({
     ],
   webServer: {
     command: 'npm run start',
+    timeout: 120000,
     url: 'http://localhost:4200/',
   }
 });
