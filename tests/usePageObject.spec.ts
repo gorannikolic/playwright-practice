@@ -1,18 +1,21 @@
 import {test} from "@playwright/test";
 import {PageManager} from "../page-objects/pageManager";
 import {faker} from "@faker-js/faker";
+import {argosScreenshot} from "@argos-ci/playwright";
 
 test.beforeEach(async ({page}) => {
   await page.goto('/');
 })
 
-test('navigate to form page', async ({page}) => {
+test.only('navigate to form page', async ({page}) => {
   const pageManager = new PageManager(page);
   await pageManager.navigateTo().formLayoutPage()
   await pageManager.navigateTo().datepickerPage()
   await pageManager.navigateTo().smartTablePage()
   await pageManager.navigateTo().toastrPage()
+  await argosScreenshot(page, "Toastr page");
   await pageManager.navigateTo().tooltipPage()
+  await argosScreenshot(page, "Tooltip page");
 })
 
 test('parametrized methods', async ({page}) => {
@@ -26,7 +29,7 @@ test('parametrized methods', async ({page}) => {
   await pageManager.onFormLayoutPage().submitInLineFormWithNameEmailAndCheckbox(randomFullName, randomEmail, true)
 })
 
-test.skip('using datePicker', async ({page}) => {
+test('using datePicker', async ({page}) => {
   const pageManager = new PageManager(page);
   await pageManager.navigateTo().formLayoutPage()
   await pageManager.navigateTo().datepickerPage()
